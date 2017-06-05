@@ -8,29 +8,55 @@ using System.Web;
 using System.Web.Mvc;
 using BabyStore.DAL;
 using BabyStore.Models;
+using BabyStore.ViewModels;
+using static BabyStore.ViewModels.ProductIndexViewModel;
 
 namespace BabyStore.Controllers
 {
     public class ProductsController : Controller
     {
+   
+
+
+
         private StoreContext db = new StoreContext();
 
         // GET: Products
         public ActionResult Index(string category, string search)
         {
+
+            // Instantiate a new view model
+            ProductIndexViewModel viewModel = new ProductIndexViewModel();
+
+            // Select the products
             var products = db.Products.Include(p => p.Category);
+
+   
+            if (!String.IsNullOrEmpty(search))
+            {
+                // The Contains method is translated to SQL LIKE and is case-insensitive.
+                products = products.Where(p => p.Name.Contains(search) || p.Description.Contains(search) || p.Category.Name.Contains(search));
+                viewModel.Search = search;
+            }
+
+            viewModel.CatsWithCount = from matchingProducts in products
+                                      where
+                                      matchingProducts.CategoryID != null
+                                      group matchingProducts by matchingProducts.Category.Name into catGroup
+
+                                      select new CategoryWithCount()
+                                      {
+                                          CategoryName = catGroup.Key,
+                                          ProductCount = catGroup.Count()
+                                      };
 
             if (!String.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category.Name == category);
             }
+            viewModel.Products = products;
 
-            if (!String.IsNullOrEmpty(search))
-            {
-                // The Contains method is translated to SQL LIKE and is case-insensitive.
-                products = products.Where(p => p.Name.Contains(search) || p.Description.Contains(search) || p.Category.Name.Contains(search));
-            }
-            return View(products.ToList());
+            return View(viewModel);
         }
 
         // GET: Products/Details/5
