@@ -155,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
@@ -178,8 +179,17 @@
     <Compile Include="Migrations\201706181014517_productImage.Designer.cs">
       <DependentUpon>201706181014517_productImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706181105536_UniqueFileName.cs" />
+    <Compile Include="Migrations\201706181105536_UniqueFileName.Designer.cs">
+      <DependentUpon>201706181105536_UniqueFileName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706181332403_CreateProductImageMappings.cs" />
+    <Compile Include="Migrations\201706181332403_CreateProductImageMappings.Designer.cs">
+      <DependentUpon>201706181332403_CreateProductImageMappings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\ProductImageMapping.cs" />
     <Compile Include="Models\ProductImage.cs" />
     <Compile Include="Models\ProductMetaData.cs" />
     <Compile Include="Models\Product.cs" />
@@ -190,6 +200,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\ProductImages\portal-3.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\portal-3.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -241,6 +253,7 @@
     <Content Include="Views\ProductImages\Details.cshtml" />
     <Content Include="Views\ProductImages\Edit.cshtml" />
     <Content Include="Views\ProductImages\Index.cshtml" />
+    <Content Include="Views\Error\FileUploadLimitExceeded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706121127043_InitialCreate.resx">
@@ -254,6 +267,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706181014517_productImage.resx">
       <DependentUpon>201706181014517_productImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181105536_UniqueFileName.resx">
+      <DependentUpon>201706181105536_UniqueFileName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706181332403_CreateProductImageMappings.resx">
+      <DependentUpon>201706181332403_CreateProductImageMappings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -273,7 +292,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ProductImages\Thumbnails\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
