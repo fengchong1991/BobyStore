@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BabyStore.Models.Category>
+﻿@model IEnumerable<BabyStore.Models.ProductImage>
 
 @{
     ViewBag.Title = "Index";
@@ -7,12 +7,12 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Upload")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.FileName)
         </th>
         <th></th>
     </tr>
@@ -20,7 +20,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink(item.Name, "Index", "Product", new { category = item.Name }, null)
+            @Html.DisplayFor(modelItem => item.FileName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
@@ -31,4 +31,3 @@
 }
 
 </table>
- 
